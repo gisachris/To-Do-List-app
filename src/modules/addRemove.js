@@ -1,22 +1,9 @@
-import _ from 'lodash';
-import './style.css';
-import refreshImage from './refresh.png';
-import arrow from './arrow-key.svg';
-import dots from './dots.svg';
-import trash from './trash.svg';
+import arrow from '../arrow-key.svg';
+import dots from '../dots.svg';
+import trash from '../trash.svg';
 
 // selecting the container
 const container = document.querySelector('.container');
-
-// selecting the header section
-const headerSection = document.querySelector('.header');
-
-// making the refresh button image
-const refresh = document.createElement('img');
-refresh.classList.add('refreshButton');
-refresh.src = refreshImage;
-
-headerSection.append(refresh);
 
 // selecting the input container
 const inputSection = document.querySelector('.inputSection');
@@ -30,16 +17,8 @@ arrowHolder.src = arrow;
 
 inputSection.append(inputField, arrowHolder);
 
-// selecting the button
-const button = document.querySelector('.clearAll');
-
 // implementing list functionality
-
-const taskHolder = [
-  { description: 'wash utensils', completed: false, index: 1 },
-    { description: 'Go to the market', completed: true, index: 2 },
-    { description: 'go for a jog', completed: false, index: 3 },
-];
+const taskHolder = [];
 
 class Task {
   constructor(description) {
@@ -54,6 +33,9 @@ const taskCreator = () => {
   taskHolder.push(newTask);
   inputField.value = '';
 };
+
+// selecting the button
+const button = document.querySelector('.clearAll');
 
 // create the dom elements to support the array
 const taskSection = document.createElement('section');
@@ -81,10 +63,8 @@ const addToDom = () => {
       `;
     tasklist.append(taskListItem);
   });
+  console.log(taskHolder);
 };
-
-// render list-section dynamically when page loads
-window.addEventListener('load', addToDom());
 
 inputField.addEventListener('keydown', (event) => {
   if (event.key === 'Enter' && !(inputField.value === '')) {
@@ -100,15 +80,7 @@ arrowHolder.addEventListener('click', () => {
   }
 });
 
-const refreshButton = document.querySelector('.refreshButton');
-refreshButton.addEventListener('click', () => {
-  if (refreshButton.classList.contains('rotate')) {
-    refreshButton.classList.toggle('rotate');
-    refreshButton.classList.add('rotateBack');
-  } else if (refreshButton.classList.contains('rotateBack')) {
-    refreshButton.classList.toggle('rotateBack');
-    refreshButton.classList.add('rotate');
-  } else {
-    refreshButton.classList.add('rotate');
-  }
-});
+// render list-section dynamically when page loads
+window.addEventListener('load', addToDom());
+
+export {container,taskHolder,taskSection,tasklist,addToDom,arrowHolder,button};
