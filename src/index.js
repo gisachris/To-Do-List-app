@@ -93,6 +93,9 @@ arrowHolder.addEventListener('click', () => {
   }
 });
 
+// render list-section dynamically when page loads
+window.addEventListener('load', addToDom());
+
 const refreshButton = document.querySelector('.refreshButton');
 refreshButton.addEventListener('click', () => {
   if (refreshButton.classList.contains('rotate')) {
