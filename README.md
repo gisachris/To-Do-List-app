@@ -16,10 +16,11 @@
 - [💻 Getting Started](#getting-started)
   - [Setup](#setup)
   - [Prerequisites](#prerequisites)
-  - [Install](#install)
+  - [Install](#Install)
+  - [Setup](#Setup)
+  - [Deployment](#deployment)
   - [Usage](#usage)
   - [Run tests](#run-tests)
-  - [Deployment](#triangular_flag_on_post-deployment)
 - [👥 Authors](#authors)
 - [🔭 Future Features](#future-features)
 - [🤝 Contributing](#contributing)
@@ -104,6 +105,15 @@ Example command:
 ```sh
   node.js V16 and above
 ```
+
+### Install
+Install this project with:
+-you can install the project using the following resources
+webpack
+nodejs
+
+### Deployment
+Not available
 
 
 ### Usage
