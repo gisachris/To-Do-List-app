@@ -11,7 +11,7 @@ const inputSection = document.querySelector('.inputSection');
 // selecting the input field
 export const inputField = document.getElementById('inputField');
 
-//local storage
+// local storage
 const inputStorage = JSON.parse(localStorage.getItem('inputdata')) || {};
 inputField.value = inputStorage.inputField || '';
 
@@ -30,7 +30,7 @@ const clearInput = () => {
 // attach an event listener to the input field to listen for changes
 inputField.addEventListener('input', inputSave);
 
-//selecting the arrow for entry
+// selecting the arrow for entry
 const arrowHolder = document.createElement('img');
 arrowHolder.classList.add('arrow');
 arrowHolder.src = arrow;
@@ -38,14 +38,14 @@ arrowHolder.src = arrow;
 inputSection.append(inputField, arrowHolder);
 
 // implementing list functionality
-//const taskHolder = [];
+// const taskHolder = [];
 
-//local storage for array
+// local storage for array
+const taskHolder = JSON.parse(localStorage.getItem('taskList')) || [];
+
 const bookSave = () => {
   localStorage.setItem('taskList', JSON.stringify(taskHolder));
 };
-
-const taskHolder = JSON.parse(localStorage.getItem('taskList')) || [];
 
 class Task {
   constructor(description) {
@@ -82,7 +82,7 @@ const addToDom = () => {
 
     const taskListItem = document.createElement('li');
     taskListItem.classList.add('listInstance');
-    taskListItem.setAttribute('data-index',index);
+    taskListItem.setAttribute('data-index', index);
     taskListItem.innerHTML = `
       <input type="checkbox" name="${index}" id="${index}" class='checkbox'>
       <span class='descriptionText' data-index='${index}'>${description}</span>
@@ -101,7 +101,7 @@ const addToDom = () => {
           input.classList.add('input-2');
           input.type = 'text';
           input.value = span.innerText;
-          
+
           input.addEventListener('blur', () => {
             span.innerText = input.value;
             instance.description = input.value;
@@ -110,7 +110,7 @@ const addToDom = () => {
             }, 0);
             localStorage.setItem('taskList', JSON.stringify(taskHolder));
           });
-          
+
           input.addEventListener('keydown', (event) => {
             if (event.key === 'Enter') {
               span.innerText = input.value;
@@ -120,7 +120,7 @@ const addToDom = () => {
               }, 0);
             }
             localStorage.setItem('taskList', JSON.stringify(taskHolder));
-          });          
+          });
           span.replaceWith(input);
           input.focus();
         });
@@ -128,15 +128,14 @@ const addToDom = () => {
       });
     });
     bookSave();
-    });
-    console.log(taskHolder);
+  });
 };
 
 inputField.addEventListener('keydown', (event) => {
   if (event.key === 'Enter' && !(inputField.value === '')) {
     taskCreator();
     addToDom();
-    clearInput();    
+    clearInput();
   }
 });
 
@@ -153,20 +152,19 @@ window.addEventListener('load', () => {
   addToDom();
 });
 
-//handle clicks
+// handle clicks
 const handleDeleteClick = (event) => {
   const listItem = event.target.closest('li');
-  const listItemIndex = parseInt(listItem.dataset.index);
-  const indexInTaskHolder = taskHolder.findIndex(task => task.index === listItemIndex);
+  const listItemIndex = parseInt(listItem.dataset.index, 10);
+  const indexInTaskHolder = taskHolder.findIndex((task) => task.index === listItemIndex);
   if (indexInTaskHolder !== -1) {
     taskHolder.splice(indexInTaskHolder, 1);
-  }else if(indexInTaskHolder === 0) {
+  } else if (indexInTaskHolder === 0) {
     taskHolder.splice(0, taskHolder.length);
   }
   listItem.remove();
   localStorage.setItem('taskList', JSON.stringify(taskHolder));
 };
-
 
 const handleDotClick = (event) => {
   const dot = event.target;
@@ -174,13 +172,13 @@ const handleDotClick = (event) => {
   const deleteButton = listItem.querySelector('.trash');
   deleteButton.style.display = 'block';
   dot.style.display = 'none';
-}
+};
 
 const listRefresher = () => {
   taskHolder.forEach((item, index) => {
     item.index = index;
   });
-}
+};
 
 document.addEventListener('click', (event) => {
   const isDot = event.target.classList.contains('threedots');
@@ -192,7 +190,8 @@ document.addEventListener('click', (event) => {
     listRefresher();
   }
 });
-console.log(taskHolder);
 
-export {container,taskHolder,taskSection,tasklist,addToDom,arrowHolder,button};
+export {
+  container, taskHolder, taskSection, tasklist, addToDom, arrowHolder, button,
+};
 export default taskHolder;
