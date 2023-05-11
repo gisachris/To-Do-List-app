@@ -45,17 +45,7 @@ body {
   margin-right: 20px;
   align-self: center;
   cursor: pointer;
-
-  /* transform: rotate(0deg);
-  transition-property: transform;
-  transition-duration: 400ms;
-  transition-delay: 0ms; */
 }
-
-/* .refreshButton:active {
-  transform: rotate(-180deg);
-  margin-right: 20px;
-} */
 
 .rotate {
   animation: rotate 400ms linear;
@@ -97,8 +87,6 @@ body {
   width: 80%;
   height: 50px;
   border: 0;
-
-  /* background-color: rgb(253, 253, 216); */
   padding-left: 10px;
 }
 
@@ -120,24 +108,30 @@ input:focus {
 .taskSection {
   width: 100%;
   min-height: 246px;
+  overflow: clip;
 }
 
 .tasklist {
   list-style-type: none;
   padding: 0;
+  margin-top: 0;
 }
 
 .listInstance {
   min-width: 100%;
+  max-width: 100%;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   column-gap: 10px;
-  margin-left: 10px;
+  padding-left: 10px;
   font-size: 1.25rem;
   font-weight: bold;
   font-family: 'Instrument Sans', sans-serif;
+  border-bottom: 1px solid #a5a5a5;
+  height: 50px;
+  overflow-y: clip;
 }
 
 .checkbox {
@@ -146,9 +140,22 @@ input:focus {
 
 .descriptionText {
   width: 80%;
+  cursor: pointer;
 }
 
-img[class^="threedots-"] {
+.input-2 {
+  width: 80%;
+  border: 0;
+  height: 50px;
+  font-size: 1.25rem;
+  font-weight: bold;
+  font-family: 'Instrument Sans', sans-serif;
+  background-color: rgba(255, 255, 167, 0.607);
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.threedots {
   width: fit-content;
   padding-right: 25px;
   cursor: pointer;
@@ -158,6 +165,7 @@ img[class^="threedots-"] {
   display: none;
   float: right;
   cursor: pointer;
+  padding-right: 25px;
 }
 
 .clearAll {
