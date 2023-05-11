@@ -37,8 +37,8 @@ const button = document.querySelector('.clearAll');
 
 const taskHolder = [
   { description: 'wash utensils', completed: false, index: 1 },
-    { description: 'Go to the market', completed: true, index: 2 },
-    { description: 'go for a jog', completed: false, index: 3 },
+  { description: 'Go to the market', completed: true, index: 2 },
+  { description: 'go for a jog', completed: false, index: 3 },
 ];
 
 class Task {
@@ -85,20 +85,6 @@ const addToDom = () => {
 
 // render list-section dynamically when page loads
 window.addEventListener('load', addToDom());
-
-inputField.addEventListener('keydown', (event) => {
-  if (event.key === 'Enter' && !(inputField.value === '')) {
-    taskCreator();
-    addToDom();
-  }
-});
-
-arrowHolder.addEventListener('click', () => {
-  if (!(inputField.value === '')) {
-    taskCreator();
-    addToDom();
-  }
-});
 
 const refreshButton = document.querySelector('.refreshButton');
 refreshButton.addEventListener('click', () => {
