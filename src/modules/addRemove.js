@@ -144,7 +144,7 @@ arrowHolder.addEventListener('click', () => {
     taskCreator();
     addToDom();
     clearInput();
-  location.reload();
+    location.reload();
   }
 });
 
