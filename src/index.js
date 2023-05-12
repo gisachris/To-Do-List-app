@@ -2,6 +2,7 @@ import _ from 'lodash';
 import './style.css';
 import refreshImage from './refresh.png';
 import * as functionality from './modules/addRemove.js';
+import * as interactions from './modules/interaction.js';
 
 // selecting the header section
 const headerSection = document.querySelector('.header');
