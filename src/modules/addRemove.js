@@ -9,7 +9,7 @@ const container = document.querySelector('.container');
 const inputSection = document.querySelector('.inputSection');
 
 // selecting the input field
-export const inputField = document.getElementById('inputField');
+const inputField = document.getElementById('inputField');
 
 // local storage
 const inputStorage = JSON.parse(localStorage.getItem('inputdata')) || {};
@@ -38,10 +38,9 @@ arrowHolder.src = arrow;
 inputSection.append(inputField, arrowHolder);
 
 // implementing list functionality
-// const taskHolder = [];
 
 // local storage for array
-const taskHolder = JSON.parse(localStorage.getItem('taskList')) || [];
+let taskHolder = JSON.parse(localStorage.getItem('taskList')) || [];
 
 const bookSave = () => {
   localStorage.setItem('taskList', JSON.stringify(taskHolder));
@@ -152,18 +151,40 @@ window.addEventListener('load', () => {
   addToDom();
 });
 
-// handle clicks
+const listRefresher = () => {
+  taskHolder.forEach((item, index) => {
+    item.index = index;
+  });
+  localStorage.setItem('taskList', JSON.stringify(taskHolder));
+};
+
 const handleDeleteClick = (event) => {
   const listItem = event.target.closest('li');
   const listItemIndex = parseInt(listItem.dataset.index, 10);
-  const indexInTaskHolder = taskHolder.findIndex((task) => task.index === listItemIndex);
+
+  let indexInTaskHolder = -1;
+  taskHolder.forEach((task, index) => {
+    if (task.index === listItemIndex) {
+      indexInTaskHolder = index;
+    } else if (index > indexInTaskHolder) {
+      // eslint-disable-next-line no-plusplus
+      task.index--;
+    }
+  });
+
   if (indexInTaskHolder !== -1) {
     taskHolder.splice(indexInTaskHolder, 1);
+    localStorage.setItem('taskList', JSON.stringify(taskHolder));
+    listRefresher();
+    listItem.remove();
   } else if (indexInTaskHolder === 0) {
-    taskHolder.splice(0, taskHolder.length);
+    taskHolder = [];
+    localStorage.setItem('taskList', JSON.stringify(taskHolder));
+    listRefresher();
+    listItem.remove();
   }
-  listItem.remove();
-  localStorage.setItem('taskList', JSON.stringify(taskHolder));
+  // eslint-disable-next-line no-restricted-globals
+  location.reload();
 };
 
 const handleDotClick = (event) => {
@@ -174,12 +195,6 @@ const handleDotClick = (event) => {
   dot.style.display = 'none';
 };
 
-const listRefresher = () => {
-  taskHolder.forEach((item, index) => {
-    item.index = index;
-  });
-};
-
 document.addEventListener('click', (event) => {
   const isDot = event.target.classList.contains('threedots');
   const isTrash = event.target.classList.contains('trash');
@@ -187,11 +202,11 @@ document.addEventListener('click', (event) => {
     handleDotClick(event);
   } else if (isTrash) {
     handleDeleteClick(event);
-    listRefresher();
+    // listRefresher();
   }
 });
 
-export {
-  container, taskHolder, taskSection, tasklist, addToDom, arrowHolder, button,
-};
-export default taskHolder;
+// export {
+//   container, taskHolder, taskSection, tasklist, addToDom, arrowHolder, button,
+// };
+// export default taskHolder;
