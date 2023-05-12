@@ -1,4 +1,3 @@
-/* eslint-disable no-restricted-globals */
 import arrow from '../arrow-key.svg';
 import dots from '../dots.svg';
 import trash from '../trash.svg';
