@@ -1,6 +1,7 @@
 import arrow from '../arrow-key.svg';
 import dots from '../dots.svg';
 import trash from '../trash.svg';
+import updateCheckbox, { updateOnload } from './interaction.js';
 
 // selecting the container
 const container = document.querySelector('.container');
@@ -83,13 +84,12 @@ const addToDom = () => {
     taskListItem.classList.add('listInstance');
     taskListItem.setAttribute('data-index', index);
     taskListItem.innerHTML = `
-      <input type="checkbox" name="${index}" id="${index}" class='checkbox'>
+      <input type="checkbox" name="${index}" id="${index}" class='checkbox' data-index='${index}'>
       <span class='descriptionText' data-index='${index}'>${description}</span>
       <img src=${dots} class='threedots'data-index='${index}'>
       <img src=${trash} class='trash' data-index='${index}'>
       `;
     tasklist.append(taskListItem);
-
     const listStruc = document.querySelectorAll('.listInstance');
     listStruc.forEach((inst) => {
       // edit description
@@ -127,6 +127,8 @@ const addToDom = () => {
       });
     });
     bookSave();
+    updateOnload();
+    updateCheckbox();
   });
 };
 
@@ -183,7 +185,6 @@ const handleDeleteClick = (event) => {
     listRefresher();
     listItem.remove();
   }
-  // eslint-disable-next-line no-restricted-globals
   location.reload();
 };
 
@@ -205,8 +206,3 @@ document.addEventListener('click', (event) => {
     // listRefresher();
   }
 });
-
-// export {
-//   container, taskHolder, taskSection, tasklist, addToDom, arrowHolder, button,
-// };
-// export default taskHolder;
