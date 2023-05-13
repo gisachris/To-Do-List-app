@@ -22,6 +22,7 @@ const updateCheckbox = () => {
         // add the styles
         spanCheck.classList.add('checked');
         spanCheck.classList.remove('descriptionText');
+        box.setAttribute('autocomplete', 'on');
         taskHolder[boxId].completed = true;
         bookSave();
       } else {
@@ -31,6 +32,26 @@ const updateCheckbox = () => {
         bookSave();
       }
     });
+  });
+};
+
+const updateOnload = () => {
+  const checkboxes = document.querySelectorAll('.checkbox');
+  taskHolder = JSON.parse(localStorage.getItem('taskList')) || [];
+
+  checkboxes.forEach((box) => {
+    const boxId = parseInt(box.dataset.index, 10);
+    const spanCheck = box.nextElementSibling;
+
+    if (taskHolder[boxId].completed) {
+      spanCheck.classList.add('checked');
+      spanCheck.classList.remove('descriptionText');
+      box.checked = true;
+    } else {
+      spanCheck.classList.remove('checked');
+      spanCheck.classList.add('descriptionText');
+      box.checked = false;
+    }
   });
 };
 
@@ -60,5 +81,7 @@ const deleteTrue = () => {
 };
 
 bottomButton.addEventListener('click', deleteTrue);
+window.addEventListener('load', updateOnload);
 
 export default updateCheckbox;
+export { updateOnload };
