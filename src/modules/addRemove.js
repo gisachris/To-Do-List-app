@@ -1,7 +1,7 @@
 import arrow from '../arrow-key.svg';
 import dots from '../dots.svg';
 import trash from '../trash.svg';
-import {updateCheckbox} from './interaction.js';
+import updateCheckbox from './interaction.js';
 
 // selecting the container
 const container = document.querySelector('.container');

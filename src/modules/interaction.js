@@ -4,37 +4,37 @@ const bookSave = () => {
   localStorage.setItem('taskList', JSON.stringify(taskHolder));
 };
 
-//checkbox function
+// checkbox function
 const updateCheckbox = () => {
   const checkboxes = document.querySelectorAll('.checkbox');
-  
+
   checkboxes.forEach((box) => {
     box.addEventListener('change', (event) => {
       const checker = event.target;
       const spanCheck = box.nextElementSibling;
 
-      //acessing the taskholder for changes
-      const boxId = parseInt(box.dataset.index);
+      // acessing the taskholder for changes
+      const boxId = parseInt(box.dataset.index, 10);
       taskHolder = JSON.parse(localStorage.getItem('taskList')) || [];
 
-      //edge cases 
-      if(checker.checked){
-         // add the styles
-         spanCheck.classList.add('checked');
-         spanCheck.classList.remove('descriptionText');
-         taskHolder[boxId].completed = true;
-         bookSave();
-      }else {
+      // edge cases
+      if (checker.checked) {
+        // add the styles
+        spanCheck.classList.add('checked');
+        spanCheck.classList.remove('descriptionText');
+        taskHolder[boxId].completed = true;
+        bookSave();
+      } else {
         spanCheck.classList.remove('checked');
         spanCheck.classList.add('descriptionText');
         taskHolder[boxId].completed = false;
         bookSave();
       }
-    })
-  })
-}
+    });
+  });
+};
 
-//delete button
+// delete button
 const bottomButton = document.querySelector('.clearAll');
 
 const deleteTrue = () => {
@@ -61,5 +61,4 @@ const deleteTrue = () => {
 
 bottomButton.addEventListener('click', deleteTrue);
 
-
-export {updateCheckbox};
+export default updateCheckbox;
