@@ -1,42 +1,40 @@
 let taskHolder = JSON.parse(localStorage.getItem('taskList')) || [];
 
-window.addEventListener('load', () => {
-  const checkbox = document.querySelectorAll('.checkbox[data-index]');
+const bookSave = () => {
+  localStorage.setItem('taskList', JSON.stringify(taskHolder));
+};
 
-  // checkbox functionality
-  checkbox.forEach((check) => {
-    const { index } = check.dataset;
-    const spanCheck = check.nextElementSibling;
-    check.addEventListener('click', (event) => {
-      if (event.target.checked) {
-        // add the styles
-        spanCheck.classList.add('checked');
-        spanCheck.classList.remove('descriptionText');
+//checkbox function
+const updateCheckbox = () => {
+  const checkboxes = document.querySelectorAll('.checkbox');
+  
+  checkboxes.forEach((box) => {
+    box.addEventListener('change', (event) => {
+      const checker = event.target;
+      const spanCheck = box.nextElementSibling;
 
-        // change the completed property
-        taskHolder[index].completed = true;
-        localStorage.setItem('taskList', JSON.stringify(taskHolder));
-      } else {
-        // add the styles
-        const spanCheck = check.nextElementSibling;
+      //acessing the taskholder for changes
+      const boxId = parseInt(box.dataset.index);
+      taskHolder = JSON.parse(localStorage.getItem('taskList')) || [];
+
+      //edge cases 
+      if(checker.checked){
+         // add the styles
+         spanCheck.classList.add('checked');
+         spanCheck.classList.remove('descriptionText');
+         taskHolder[boxId].completed = true;
+         bookSave();
+      }else {
         spanCheck.classList.remove('checked');
         spanCheck.classList.add('descriptionText');
-
-        // change the completed property
-        taskHolder[index].completed = false;
-        localStorage.setItem('taskList', JSON.stringify(taskHolder));
+        taskHolder[boxId].completed = false;
+        bookSave();
       }
-    });
-  });
+    })
+  })
+}
 
-  // when the page is reloaded
-  taskHolder.forEach((instance, index) => {
-    instance.index = index;
-    instance.completed = false;
-    localStorage.setItem('taskList', JSON.stringify(taskHolder));
-  });
-});
-
+//delete button
 const bottomButton = document.querySelector('.clearAll');
 
 const deleteTrue = () => {
@@ -62,3 +60,6 @@ const deleteTrue = () => {
 };
 
 bottomButton.addEventListener('click', deleteTrue);
+
+
+export {updateCheckbox};

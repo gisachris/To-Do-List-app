@@ -1,6 +1,7 @@
 import arrow from '../arrow-key.svg';
 import dots from '../dots.svg';
 import trash from '../trash.svg';
+import {updateCheckbox} from './interaction.js';
 
 // selecting the container
 const container = document.querySelector('.container');
@@ -126,6 +127,7 @@ const addToDom = () => {
       });
     });
     bookSave();
+    updateCheckbox();
   });
 };
 
@@ -134,7 +136,6 @@ inputField.addEventListener('keydown', (event) => {
     taskCreator();
     addToDom();
     clearInput();
-    location.reload();
   }
 });
 
@@ -143,7 +144,6 @@ arrowHolder.addEventListener('click', () => {
     taskCreator();
     addToDom();
     clearInput();
-    location.reload();
   }
 });
 
