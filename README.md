@@ -60,8 +60,9 @@ i buit this website using the html and css tech stack.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## 🚀 Live Demo <a name="live-demo"></a>
+You can checkout the live demo below 👍
 
-there is no live demo for this template
+https://gisachris.github.io/To-Do-List-app/dist/
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -93,12 +94,6 @@ Example commands:
 ```sh
   cd my-folder
   git clone https://github.com/gisachris/Webpack-template.git```
-
-
-### Install
-
-Install this project with:
-
 
 Example command:
 
