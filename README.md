@@ -62,7 +62,7 @@ i buit this website using the html and css tech stack.
 ## 🚀 Live Demo <a name="live-demo"></a>
 You can checkout the live demo below 👍
 
-https://gisachris.github.io/To-Do-List-app/dist/
+[lister.com](https://lister-hm86.onrender.com)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
